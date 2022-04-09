@@ -6,6 +6,6 @@ $("#search-form").on("submit", function(event) {
         alert("You must include a search input.");
         return;
     };
-    var queryString = "./searchresults.html?q=" + searchInputVal + "&format" + selectInputVal; 
-    location.replace(queryString);
+    var queryString = "./searchresults.html?q=" + searchInputVal + "&format=" + selectInputVal; 
+    location.assign(queryString);
 })
