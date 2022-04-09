@@ -7,16 +7,24 @@ var getSearchInput = function () {
     getSearchResultsIssues(searchInput, selectInput); 
 };
 
-function getSearchResultsIssues(searchIn, selectIn) {
-    var LOCURL = "https://www.loc.gov/" + selectIn + "/?q=" + searchIn + "&fo=json";
+function getSearchResultsIssues(searchInput, selectInput) {
+    var LOCURL = 'https://www.loc.gov/search/?fo=json';
 
-    fetch(LOCURL).then(function (response) {
+    if(selectInput) {
+        LOCURL = 'https://www.loc.gov/' + selectInput + '/?fo=json';
+    }
+    
+    LOCURL = LOCURL + '&q=' + searchInput;
+
+    fetch(LOCURL)
+    .then(function (response) {
         if (response.ok) {
-            response.json().then(function (data) {
+            response.json()
+            .then(function (data) {
                 displaySearchResults(data);
             })
         } else {
-            return;
+            throw response.json();
         };
     });
 };
